@@ -2,7 +2,7 @@ shopt -s extglob
 
 # The standard library.
 if [[ ! -f  /tmp/stdlib.sh ]]; then
-  curl -s https://raw.githubusercontent.com/heroku/buildpack-stdlib/master/stdlib.sh > /tmp/stdlib.sh
+  curl -s https://lang-common.s3.amazonaws.com/buildpack-stdlib/latest/stdlib.sh> /tmp/stdlib.sh
 fi
 source /tmp/stdlib.sh
 
