@@ -1,13 +1,10 @@
-# Generate requriements.txt with pipenv.
-
+# Pipenv support (Generate requriements.txt with pipenv).
 if [[ -f Pipfile ]]; then
     if [[ ! -f requirements.txt ]]; then
         puts-step "Generating 'requirements.txt' with pipenv"
 
-        pip install pipenv --upgrade &> /dev/null
-        pipenv lock --requirements > requirements.txt 2> /dev/null
+        /app/.heroku/python/bin/pip install pipenv --upgrade &> /dev/null
 
-        pipstrip requirements.txt
+        /app/.heroku/python/bin/pipenv lock --requirements --no-hashes > $BUILD_DIR/requirements.txt 2> /dev/null
     fi
 fi
-

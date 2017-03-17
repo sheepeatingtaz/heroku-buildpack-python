@@ -1,5 +1,17 @@
 # Python Buildpack Changelog
 
+## 102
+
+Buildpack code cleanup.
+
+- Improved messaging around NLTK.
+
+## 101
+
+Updated setuptools installation method.
+
+- Improved pipenv support.
+
 ## 100
 
 Preliminary pipenv support.
