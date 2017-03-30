@@ -25,11 +25,10 @@ pip-grep -s requirements.txt django Django && DJANGO_INSTALLED=1
 
 if [ ! "$DISABLE_COLLECTSTATIC" ] && [ -f "$MANAGE_FILE" ] && [ "$DJANGO_INSTALLED" ]; then
     set +e
-
-    puts-cmd "python $MANAGE_FILE collectstatic --noinput"
+    puts-cmd "python $MANAGE_FILE post_deploy"
 
     # Run collectstatic, cleanup some of the noisy output.
-    python $MANAGE_FILE collectstatic --noinput --traceback 2>&1 | sed '/^Post-processed/d;/^Copying/d;/^$/d' | indent
+    python $MANAGE_FILE post_deploy
     COLLECTSTATIC_STATUS="${PIPESTATUS[0]}"
 
     set -e
@@ -38,7 +37,7 @@ if [ ! "$DISABLE_COLLECTSTATIC" ] && [ -f "$MANAGE_FILE" ] && [ "$DJANGO_INSTALL
     [ $COLLECTSTATIC_STATUS -ne 0 ] && {
 
         echo
-        echo " !     Error while running '$ python $MANAGE_FILE collectstatic --noinput'."
+        echo " !     Error while running '$ python $MANAGE_FILE post_deploy'."
         echo "       See traceback above for details."
         echo
         echo "       You may need to update application code to resolve this error."
